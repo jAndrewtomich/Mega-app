@@ -17,6 +17,7 @@ flask-bootstrap=3.3.7.1=py_0
 flask-login=0.5.0=pyh9f0ad1d_0
 flask-mail=0.9.1=py_2
 flask-migrate=3.1.0=pyhd8ed1ab_0
+flask-moment=1.0.2=pyhd8ed1ab_0
 flask-sqlalchemy=2.5.1=pyhd8ed1ab_0
 flask-wtf=0.15.1=pyhd8ed1ab_0
 gmp=6.2.1=h58526e2_0

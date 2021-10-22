@@ -13,17 +13,19 @@
 				{% if user == current_user %}
 					<p><a href="{{ url_for('edit_profile') }}">Edit your Profile</a></p>
 				{% elif not current_user.is_following(user) %}
-					<div class="row">
-						<div class="col-md-4">
-							{{ wtf.quick_form(form) }}
-						</div>
-					</div>
+					<p>
+						<form action="{{ url_for('follow', username=user.username) }}" method="post">
+							{{ form.hidden_tag() }}
+							{{ form.submit(value='Follow') }}
+						</form>
+					</p>
 				{% else %}
-					<div class="row">
-						<div class="col-md-4">
-							{{ wtf.quick_form(form) }}
-						</div>
-					</div>
+					<p>
+						<form action="{{ url_for('unfollow', username=user.username) }}" method="post">
+							{{ form.hidden_tag() }}
+							{{ form.submit(value='Unfollow') }}
+						</form>
+					</p>
 				{% endif %}
 			</td>
 		</tr>
