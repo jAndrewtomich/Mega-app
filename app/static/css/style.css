@@ -1,4 +1,79 @@
-#intro > img {
+/* ROOT */
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+:root {
+	--ff-primary: 'Ubuntu', sans-serif;
+	--ff-secondary: 'Roboto Slab', serif;
+
+	--fw-reg: 400;
+	--fw-bold: 700;
+	
+	--clr-light: #798EA4;
+	--clr-dark: #363945;
+	--clr-accent: #E8A798;
+
+	--fs-body: 1rem;
+}
+
+@media (min-width: 800px) {
+	:root {
+		--fs-body: 1.125rem;
+	}
+}
+
+/* GENERAL CSS */
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	background: var(--clr-light);
+	color: var(--clr-dark);
+	margin: 0;
+	font-family: var(--ff-primary);
+	font-size: var(--fs-body);
+	line-height: 1.6;
+}
+
+strong {
+	display: block;
+	max-width: 100%;
+}
+
+:focus {
+	outline: 3px solid var(--clr-accent);
+	outline-offset: 3px;
+}
+
+/* BUTTONS */
+
+.btn {
+	display: inline-block;
+	padding: .5em 2.5em;
+	background: var(--clr-accent);
+	color: var(--clr-dark);
+	text-decoration: none;
+	cursor: pointer;
+	font-size: .8rem;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-weight: var(--fw-bold);
+	transition: transform 200ms ease-in-out;
+}
+
+.btn:hover {
+	transform: scale(1.1);
+}
+
+/* TYPOGRAPHY */
+
+#intro img {
 	max-height: 200px;
 	max-width: 200px;
 	border-radius: 50%;

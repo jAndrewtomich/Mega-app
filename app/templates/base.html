@@ -4,13 +4,17 @@
 	{% if title %}
 		{{ title }} - MEGA APP
 	{% else %}
-		Welcome to MEGA APP!
+		{{ _('Welcome to MEGA APP') }}
 	{% endif %}
 {% endblock %}
 
 {% block styles %}
 	{{ super() }}
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200&display=swap" rel="stylesheet">
 {% endblock %}
 
 {% block navbar %}
@@ -23,19 +27,19 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="{{ url_for('index') }}">MEGA APP</a>
+				<a class="navbar-brand" href="{{ url_for('main.index') }}">MEGA APP</a>
 			</div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url_for('index') }}">Home</a></li>
-					<li><a href="{{ url_for('explore') }}">Explore</a></li>
+					<li><a href="{{ url_for('main.index') }}">{{ _('Home') }}</a></li>
+					<li><a href="{{ url_for('main.explore') }}">{{ _('Explore') }}</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					{% if current_user.is_anonymous %}
-						<li><a href="{{ url_for('login') }}">Login</a></li>
+						<li><a href="{{ url_for('auth.login') }}">{{ _('Login') }}</a></li>
 					{% else %}
-						<li><a href="{{ url_for('user', username=current_user.username) }}">Profile</a></li>
-						<li><a href="{{ url_for('logout') }}">Logout</a></li>
+						<li><a href="{{ url_for('main.user', username=current_user.username) }}">{{ _('Profile') }}</a></li>
+						<li><a href="{{ url_for('auth.logout') }}">{{ _('Logout') }}</a></li>
 					{% endif %}
 				</ul>
 			</div>
@@ -44,6 +48,12 @@
 {% endblock %}
 
 {% block content %}
+	<div class="container" id="intro">
+		<h1>Hi, I'm <strong>Andrew Tomich</strong></h1>
+		<p>Software Developer</p>
+		<img src="{{ url_for('static', filename='img/at.jpg') }}" alt="Andrew Tomich">
+	</div>
+	</div>
 	<div class="container">
 		{% with messages = get_flashed_messages() %}
 			{% if messages %}
@@ -61,4 +71,19 @@
 {% block scripts %}
 	{{ super() }}
 	{{ moment.include_moment() }}
+	{{ moment.lang(g.locale) }}
+	<script>
+		function translate(sourceElem, destElem, sourceLang, destLang) {
+			$(destElem).html('<img src="{{ url_for('static', filename='loading.gif') }}">');
+			$.post('/translate', {
+				text: $(sourceElem).text(),
+				source_language: sourceLang,
+				dest_language: destLang
+			}).done(function(response) {
+				$(destElem).text(response['text'])
+			}).fail(function() {
+				$(destElem).text("{{ _('Error: Could not contact server.') }}");
+			});
+		}
+	</script>
 {% endblock %}

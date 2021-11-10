@@ -3,13 +3,7 @@
 
 {% block app_content %}
 
-	<div class="container" id="intro">
-		<h1>Hi, I'm <strong>Andrew Tomich</strong></h1>
-		<p>Software Developer</p>
-		<img src="{{ url_for('static', filename='img/at.jpg') }}" alt="Andrew Tomich">
-	</div>
-
-	<h1>Hi, {{ current_user.username }}!</h1>
+	<h1>{{ _('Hi, %(username)s!', username=current_user.username) }}</h1>
 	{% if form %}
 		{{ wtf.quick_form(form) }}
 	{% endif %}
@@ -20,12 +14,12 @@
 		<ul class="pager">
 			<li class="previous{% if not prev_url %} disabled{% endif %}">
 				<a href="{{ prev_url or '#' }}">
-					<span aria-hidden="true">&larr;</span> Newer posts
+					<span aria-hidden="true">&larr;</span>{{ _('Newer posts') }}
 				</a>
 			</li>
 			<li class="next{% if not next_url %} disabled{% endif %}">
 				<a href="{{ next_url or '#' }}">
-					Older posts <span aria-hidden="true">&rarr;</span>
+					{{ _('Older posts') }}<span aria-hidden="true">&rarr;</span>
 				</a>
 			</li>
 		</ul>
